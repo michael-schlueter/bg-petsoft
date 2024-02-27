@@ -1,6 +1,7 @@
 import AppFooter from "@/components/app-footer";
 import AppHeader from "@/components/app-header";
 import BackgroundPattern from "@/components/background-pattern";
+import { Pet } from "@/lib/types";
 import PetContextProvider from "@/pet-context-provider";
 
 export default async function Layout({
@@ -14,7 +15,7 @@ export default async function Layout({
   if (!response.ok) {
     throw new Error("Could not fetch pets");
   }
-  const data = await response.json();
+  const data: Pet[] = await response.json();
 
   return (
     <>
