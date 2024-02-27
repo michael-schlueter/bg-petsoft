@@ -2,7 +2,7 @@ import AppFooter from "@/components/app-footer";
 import AppHeader from "@/components/app-header";
 import BackgroundPattern from "@/components/background-pattern";
 import { Pet } from "@/lib/types";
-import PetContextProvider from "@/pet-context-provider";
+import PetContextProvider from "@/contexts/pet-context-provider";
 
 export default async function Layout({
   children,

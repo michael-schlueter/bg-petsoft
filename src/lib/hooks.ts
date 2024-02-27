@@ -1,12 +1,12 @@
-import { PetContext } from "@/pet-context-provider";
+import { PetContext } from "@/contexts/pet-context-provider";
 import { useContext } from "react";
 
 export function usePetContext() {
-    const context = useContext(PetContext);
+  const context = useContext(PetContext);
 
-    if (!context) {
-        throw new Error('Does not work')
-    }
+  if (!context) {
+    throw new Error("Does not work");
+  }
 
-    return context;
+  return context;
 }
