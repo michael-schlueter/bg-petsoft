@@ -7,6 +7,7 @@ import {
   DialogTrigger,
   DialogTitle,
 } from "./ui/dialog";
+import PetForm from "./pet-form";
 
 type PetButtonProps = {
   children?: React.ReactNode;
@@ -45,6 +46,7 @@ export default function PetButton({
             {actionType === "add" ? "Add a new pet" : "Edit pet"}
           </DialogTitle>
         </DialogHeader>
+        <PetForm actionType={actionType} />
       </DialogContent>
     </Dialog>
   );
