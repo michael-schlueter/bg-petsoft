@@ -1,3 +1,5 @@
+"use client";
+
 import { PlusIcon } from "@radix-ui/react-icons";
 import { Button } from "./ui/button";
 import {
