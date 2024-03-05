@@ -2,6 +2,7 @@
 
 import { createContext, useState } from "react";
 import { Pet } from "../lib/types";
+import { addPet } from "@/app/actions/actions";
 
 type PetContextProviderProps = {
   children: React.ReactNode;
@@ -38,14 +39,15 @@ export default function PetContextProvider({
     setSelectedPetId(id);
   }
 
-  function handleAddPet(newPet: Omit<Pet, "id">) {
-    setPets((prev) => [
-      ...prev,
-      {
-        id: new Date().toString(),
-        ...newPet,
-      },
-    ]);
+  async function handleAddPet(newPet: Omit<Pet, "id">) {
+    // setPets((prev) => [
+    //   ...prev,
+    //   {
+    //     id: new Date().toString(),
+    //     ...newPet,
+    //   },
+    // ]);
+    await addPet(newPet);
   }
 
   function handleEditPet(petId: string, newPetData: Omit<Pet, "id">) {
