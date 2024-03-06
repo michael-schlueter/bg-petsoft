@@ -1,9 +1,11 @@
 "use server";
 
 import prisma from "@/lib/db";
+import { sleep } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 export async function addPet(formData) {
+  await sleep(2000);
   await prisma.pet.create({
     data: {
       name: formData.get("name"),
