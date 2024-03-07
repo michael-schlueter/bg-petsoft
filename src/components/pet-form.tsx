@@ -32,8 +32,8 @@ export default function PetForm({ actionType, onSubmission }: PetFormProps) {
             toast.warning(error.message);
             return;
           }
-          onSubmission();
         }
+        onSubmission();
       }}
       className="flex flex-col"
     >
