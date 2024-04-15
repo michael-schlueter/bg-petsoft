@@ -1,7 +1,7 @@
 "use client";
 
 import { useFormStatus } from "react-dom";
-import { Button } from "./button";
+import { Button } from "./ui/button";
 
 type AuthBtnProps = {
   type: "signUp" | "logIn";
