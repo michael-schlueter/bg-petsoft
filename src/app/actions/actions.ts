@@ -7,6 +7,7 @@ import { authSchema, petFormSchema, petIdSchema } from "@/lib/validations";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcryptjs";
 import { checkAuth, getPetById } from "@/lib/server-utils";
+import { Prisma } from "@prisma/client";
 
 // --- user actions ---
 export async function logIn(formData: unknown) {
@@ -46,12 +47,25 @@ export async function signUp(formData: unknown) {
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  await prisma.user.create({
-    data: {
-      email,
-      hashedPassword,
-    },
-  });
+  try {
+    await prisma.user.create({
+      data: {
+        email,
+        hashedPassword,
+      },
+    });
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === "P2002") {
+        return {
+          message: "Email already exists.",
+        };
+      }
+    }
+    return {
+      message: "Could not create user.",
+    };
+  }
 
   await signIn("credentials", formData);
 }
