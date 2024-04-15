@@ -11,6 +11,8 @@ import { Prisma } from "@prisma/client";
 
 // --- user actions ---
 export async function logIn(formData: unknown) {
+  await sleep(1000);
+
   if (!(formData instanceof FormData)) {
     return {
       message: "Invalid form data.",
@@ -25,6 +27,8 @@ export async function logOut() {
 }
 
 export async function signUp(formData: unknown) {
+  await sleep(1000);
+
   // check if formData is a FormData type
   if (!(formData instanceof FormData)) {
     return {
