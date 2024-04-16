@@ -26,7 +26,7 @@ export async function logOut() {
   await signOut({ redirectTo: "/" });
 }
 
-export async function signUp(formData: unknown) {
+export async function signUp(prevState: unknown, formData: unknown) {
   await sleep(1000);
 
   // check if formData is a FormData type
@@ -37,20 +37,18 @@ export async function signUp(formData: unknown) {
   }
 
   // convert formData to a plain object
-  const formDataEntries = Object.entries(formData.entries());
+  const formDataEntries = Object.fromEntries(formData.entries());
 
   // validation
   const validatedFormData = authSchema.safeParse(formDataEntries);
   if (!validatedFormData.success) {
     return {
-      message: "Invalid form data",
+      message: "Invalid form data.",
     };
   }
 
   const { email, password } = validatedFormData.data;
-
   const hashedPassword = await bcrypt.hash(password, 10);
-
   try {
     await prisma.user.create({
       data: {
@@ -66,6 +64,7 @@ export async function signUp(formData: unknown) {
         };
       }
     }
+
     return {
       message: "Could not create user.",
     };
