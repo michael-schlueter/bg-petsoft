@@ -36,10 +36,8 @@ export async function logIn(prevState: unknown, formData: unknown) {
         }
       }
     }
+    throw error; // nextjs redirects throw error, so we need to rethrow it
   }
-  return {
-    message: "Could not sign in.",
-  };
 }
 
 export async function logOut() {
