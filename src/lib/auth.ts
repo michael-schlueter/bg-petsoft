@@ -58,7 +58,15 @@ const config = {
       }
 
       if (isLoggedIn && !isTryingToAccessApp) {
-        return Response.redirect(new URL("/app/dashboard", request.nextUrl));
+        // check if user is already logged and is trying to login/signup again
+        if (
+          request.nextUrl.pathname.includes("/login") ||
+          request.nextUrl.pathname.includes("/signup")
+        ) {
+          return Response.redirect(new URL("/payment", request.nextUrl));
+        }
+
+        return true;
       }
 
       if (!isLoggedIn && !isTryingToAccessApp) {
