@@ -56,7 +56,7 @@ const config = {
       if (isLoggedIn && isTryingToAccessApp && !auth?.user.hasAccess) {
         return Response.redirect(new URL("/payment", request.nextUrl));
       }
-      
+
       if (isLoggedIn && isTryingToAccessApp && auth?.user.hasAccess) {
         return true;
       }
@@ -80,10 +80,19 @@ const config = {
 
       return false;
     },
-    jwt: ({ token, user }) => {
+    jwt: async ({ token, user, trigger }) => {
       if (user) {
+        // on sign in
         token.userId = user.id;
+        token.email = user.email!;
         token.hasAccess = user.hasAccess;
+
+        if (trigger === "update") {
+          const userFromDb = await getUserByEmail(token.email);
+          if (userFromDb) {
+            token.hasAccess = userFromDb.hasAccess;
+          }
+        }
       }
       return token;
     },
