@@ -53,6 +53,10 @@ const config = {
         return false;
       }
 
+      if (isLoggedIn && isTryingToAccessApp && !auth?.user.hasAccess) {
+        return Response.redirect(new URL("/payment", request.nextUrl));
+      }
+      
       if (isLoggedIn && isTryingToAccessApp && auth?.user.hasAccess) {
         return true;
       }
@@ -60,8 +64,9 @@ const config = {
       if (isLoggedIn && !isTryingToAccessApp) {
         // check if user is already logged and is trying to login/signup again
         if (
-          request.nextUrl.pathname.includes("/login") ||
-          request.nextUrl.pathname.includes("/signup")
+          (request.nextUrl.pathname.includes("/login") ||
+            request.nextUrl.pathname.includes("/signup")) &&
+          !auth?.user.hasAccess
         ) {
           return Response.redirect(new URL("/payment", request.nextUrl));
         }
