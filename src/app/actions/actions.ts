@@ -1,6 +1,6 @@
 "use server";
 
-import { signIn, signOut } from "@/lib/auth";
+import { signIn, signOut } from "@/lib/auth-no-edge";
 import prisma from "@/lib/db";
 import { sleep } from "@/lib/utils";
 import { authSchema, petFormSchema, petIdSchema } from "@/lib/validations";
@@ -15,7 +15,6 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 // --- user actions ---
 export async function logIn(prevState: unknown, formData: unknown) {
-
   if (!(formData instanceof FormData)) {
     return {
       message: "Invalid form data.",
@@ -43,12 +42,10 @@ export async function logIn(prevState: unknown, formData: unknown) {
 }
 
 export async function logOut() {
-
   await signOut({ redirectTo: "/" });
 }
 
 export async function signUp(prevState: unknown, formData: unknown) {
-
   // check if formData is a FormData type
   if (!(formData instanceof FormData)) {
     return {
@@ -96,7 +93,6 @@ export async function signUp(prevState: unknown, formData: unknown) {
 // --- pet actions ---
 
 export async function addPet(pet: unknown) {
-
   // authentication check
   const session = await checkAuth();
 
@@ -130,7 +126,6 @@ export async function addPet(pet: unknown) {
 }
 
 export async function editPet(petId: unknown, newPetData: unknown) {
-
   // authentication check
   const session = await checkAuth();
 
@@ -176,7 +171,6 @@ export async function editPet(petId: unknown, newPetData: unknown) {
 }
 
 export async function deletePet(petId: unknown) {
-
   // authentication check
   const session = await checkAuth();
 
