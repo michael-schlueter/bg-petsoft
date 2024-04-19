@@ -61,12 +61,20 @@ const config = {
         return true;
       }
 
-      if (isLoggedIn && !isTryingToAccessApp) {
+      if (
+        isLoggedIn &&
+        (request.nextUrl.pathname.includes("/login") ||
+          request.nextUrl.pathname.includes("/signup")) &&
+        auth?.user.hasAccess
+      ) {
+        return Response.redirect(new URL("/app/dashboard", request.nextUrl));
+      }
+
+      if (isLoggedIn && !isTryingToAccessApp && !auth?.user.hasAccess) {
         // check if user is already logged and is trying to login/signup again
         if (
-          (request.nextUrl.pathname.includes("/login") ||
-            request.nextUrl.pathname.includes("/signup")) &&
-          !auth?.user.hasAccess
+          request.nextUrl.pathname.includes("/login") ||
+          request.nextUrl.pathname.includes("/signup")
         ) {
           return Response.redirect(new URL("/payment", request.nextUrl));
         }
