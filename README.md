@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# PetSoft
+> This is one of the projects from the "Professional React & Next.js" course by ByteGrad. We built an app which allows the user to track the pets which are under his care.
 
-## Getting Started
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## General Information
+- The aim of this project was to build a cutting-edge Next.js application with full CRUD functionality, optimistic UI, server actions, auth and payments.
+- I got introduced to a lot of new concepts with regards to the new React Server Components paradigm in combination with authentication, form management etc.
+- The project also was my first contact with using a payment provider like Stripe to process payments using their APIs.
+
+
+
+## Technologies Used
+- React 18
+- TypeScript 5.3.3
+- Next JS 14.1.0
+- Tailwind 3.3.0
+- Prisma 5.10.2
+- Next-Auth 5.0.0 (Beta 4)
+- Zod (3.22.4)
+- Stripe (15.1.0)
+- Radix UI
+- Bcrypt (5.1.1) / BcryptJS (2.4.3)
+
+
+
+## Features
+- Sign up / Login, every user can only see the animals which are under his care
+- Payment, in order to use the app the user needs to pay a single fee for lifetime access to the app
+- Once registered and payed, the user can add / edit / remove pets which are under his care
+- The user can provide details for each animal under his care (e.g., name, owner name, allergies etc.)
+
+
+
+## Screenshots
+![Example screenshot](https://i.ibb.co/HKCxvLq/petsoft-example.jpg)
+
+
+
+## Demo
+Live demo [_here_](https://bg-petsoft.vercel.app/).
+
+
+
+## Setup
+The dependencies which are necessary to run this app can be found in the package.json file.
+
+1. Clone the repo
+2. Install NPM packages in the project folder by running
 ```
+npm install
+```
+in the terminal.
+3. Run the app 
+```
+npm run dev
+```
+4. Visit localhost:5173 in your browser
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You will need to set up your own PostgreSQL database and connect it to the app.
+You will need an AUTH_SECRET env-variable in order to use the signup/login functionality and access the protected routes.
+You will need to hook up the app to stripe using webhooks in order to simulate the payment flow.
+You will need to provide a CANONICAL_URL env-variable to indicate which port you are using locally (e.g., localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## Learnings
+- Structuring a Full-Stack NextJS application in an efficient way e.g., to share layouts
+- Separation of concerns regarding components (e.g., no layout styles in components which can hinder reusability)
+- Handling of form data (e.g., accessing form data using methods like formData.get)
+- Triggering server actions (e.g., using the action attribute from forms instead of an onSubmit event handler)
+- Combining React-Hook-Form with zod in order to handle input validation more efficiently (using resolvers)
+- Using errors and error codes provided by Prisma (e.g., for already used email)
+- Creating and updating an JWT Token on the client using API routes
+- Wiring up stripe with the user of their API and webhooks to implement a payment flow (e.g., verify a stripe webhook using a stripe event)
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Project Status
+The project is basically finished. I may dabble into it in the future to experiment with some things. 
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Acknowledgements
+- This project is part of the [Professional React & Next.js Course](https://bytegrad.com/app/professional-react-and-nextjs/) from ByteGrad.
+
+
+
