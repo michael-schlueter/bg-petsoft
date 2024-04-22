@@ -57,10 +57,10 @@ npm run dev
 ```
 4. Visit localhost:5173 in your browser
 
-You will need to set up your own PostgreSQL database and connect it to the app.
-You will need an AUTH_SECRET env-variable in order to use the signup/login functionality and access the protected routes.
-You will need to hook up the app to stripe using webhooks in order to simulate the payment flow.
-You will need to provide a CANONICAL_URL env-variable to indicate which port you are using locally (e.g., localhost:3000).
+- You will need to set up your own PostgreSQL database and connect it to the app.
+- You will need an AUTH_SECRET env-variable in order to use the signup/login functionality and access the protected routes.
+- You will need to hook up the app to stripe using webhooks in order to simulate the payment flow.
+- You will need to provide a CANONICAL_URL env-variable to indicate which port you are using locally (e.g., localhost:3000).
 
 
 
